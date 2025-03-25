@@ -18,14 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'TonyCode1306@gmail.com';
-        $mail->Password = 'atan mfnz jyfj nqdt';
+        $mail->Username = '';
+        $mail->Password = '';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Email Content
         $mail->setFrom($email, "$firstname $lastname");
-        $mail->addAddress('TonyCode1306@gmail.com');
+        $mail->addAddress('');
         $mail->addReplyTo($email, "$firstname $lastname");
 
         $mail->Subject = "TonyPortfolio from $firstname $lastname";
