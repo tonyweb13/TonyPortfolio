@@ -1,25 +1,40 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . '/vendor/autoload.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST["name"]);
+    $firstname = htmlspecialchars($_POST["firstname"]);
+    $lastname = htmlspecialchars($_POST["lastname"]);
     $email = htmlspecialchars($_POST["email"]);
-    $phone = htmlspecialchars($_POST["phone"]);
+    $mobile = htmlspecialchars($_POST["mobile"]);
     $message = htmlspecialchars($_POST["message"]);
 
-    $to = "TonyCode1306@gmail.com";
-    $subject = "Tony Github Email from $name";
-    $headers = "From: $email" . "\r\n" .
-               "Reply-To: $email" . "\r\n" .
-               "Content-Type: text/plain; charset=UTF-8";
+    $mail = new PHPMailer(true);
 
-    $emailBody = "Name: $name\n";
-    $emailBody .= "Email: $email\n";
-    $emailBody .= "Phone: $phone\n";
-    $emailBody .= "Message:\n$message\n";
+    try {
+        // SMTP Configuration
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'TonyCode1306@gmail.com';
+        $mail->Password = 'atan mfnz jyfj nqdt';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-    if (mail($to, $subject, $emailBody, $headers)) {
+        // Email Content
+        $mail->setFrom($email, "$firstname $lastname");
+        $mail->addAddress('TonyCode1306@gmail.com');
+        $mail->addReplyTo($email, "$firstname $lastname");
+
+        $mail->Subject = "TonyPortfolio from $firstname $lastname";
+        $mail->Body = "Name: $firstname $lastname\nEmail: $email\nMobile: $mobile\nMessage:\n$message";
+
+        $mail->send();
         echo "success";
-    } else {
-        echo "error";
+    } catch (Exception $e) {
+        echo "error: {$mail->ErrorInfo}";
     }
 }
 ?>

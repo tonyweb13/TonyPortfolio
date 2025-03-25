@@ -195,16 +195,20 @@
                     <div id="submitErrorMessage" class="alert alert-danger d-none">Error sending message!</div>
                     <form id="contactForm">
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." required />
-                            <label for="name">Full name</label>
+                            <input class="form-control" id="firstname" name="firstname" type="text" placeholder="Enter your first name..." required />
+                            <label for="name">First name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="lastname" name="lastname" type="text" placeholder="Enter your last name..." required />
+                            <label for="name">Last name</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" required />
                             <label for="email">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="phone" name="phone" type="tel" placeholder="(123) 456-7890" required />
-                            <label for="phone">Phone number</label>
+                            <input class="form-control" id="mobile" name="mobile" type="number" placeholder="09123456789" required />
+                            <label for="phone">Mobile number</label>
                         </div>
                         <div class="form-floating mb-3">
                             <textarea class="form-control" id="message" name="message" placeholder="Enter your message here..." style="height: 12rem" required></textarea>
@@ -243,7 +247,7 @@ document.getElementById("contactForm").addEventListener("submit", function(event
 
     let formData = new FormData(this);
 
-    fetch("send-email.php", {
+    fetch("contact/send-email.php", {
         method: "POST",
         body: formData
     })
